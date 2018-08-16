@@ -1,0 +1,14 @@
+.wrapper{
+    margin: 0 auto;
+    width: 960px;
+}
+h1 {
+    text-align: center;
+}
+h2 {
+    text-align: center;
+}
+.images {
+    display: flex;
+
+}
