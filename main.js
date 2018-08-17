@@ -66,6 +66,7 @@ function startRound() {
   picture.setAttribute('src', gameData[picNumber].image)
   let arrayOfGuessNames = gameData[picNumber].guessNames;
   let celebSection = gameData[picNumber]
+  let countClock = document.getElementById('timer_div')
   function buttonText() {
     for (let i = 0; i < buttons.length; i++) {
       buttons[i].innerHTML = `${arrayOfGuessNames[i]}`
@@ -75,12 +76,35 @@ function startRound() {
   buttonText()
 
   function winLose() {
+
+    (function deBlur(timeLeft) {
+      setTimeout(function () {
+        picture.style.filter = `blur(${timeLeft * 4}px)`
+  
+        // var seconds_left = 10;
+        var interval = setInterval(function () {
+          document.getElementById('timer_div').innerHTML = --timeLeft;
+  
+          if (timeLeft <= 0) {
+            document.getElementById('timer_div').innerHTML = 'Times Up!';
+            clearInterval(interval);
+          }
+        }, 1000);
+  
+        if (timeLeft -= 1 && !userGuessed) {          // If blurValue > 0, keep going
+          deBlur(timeLeft);       // Call the loop again, and pass it the current value of i
+        } else {
+          picture.style.filter = `blur(${0}px)`
+          console.log('TIMES UP');
+  
+        }
+      }, 1000);
+    })(10);
     for (let i = 0; i < buttons.length; i++) {
       buttons[i].addEventListener('click', function (e) {
         let innerText = e.target.innerHTML;
         let theRightButton = e.target
         console.log(e.target);
-
         userGuessed = true;
         // set the blur to 0 here
         // set clock inner html to be '' 
@@ -100,32 +124,7 @@ function startRound() {
 
   // citation: mike helped me write this with use of a link
   // https://scottiestech.info/2014/07/01/javascript-fun-looping-with-a-delay/
-  (function deBlur(timeLeft) {
-    setTimeout(function () {
-      picture.style.filter = `blur(${timeLeft * 4}px)`
-
-      // var seconds_left = 10;
-      var interval = setInterval(function () {
-        document.getElementById('timer_div').innerHTML = --timeLeft;
-
-        if (timeLeft <= 0) {
-          document.getElementById('timer_div').innerHTML = 'Times Up!';
-          clearInterval(interval);
-        }
-      }, 1000);
-
-
-
-      // set the clock element inner html to equal timeleft
-      if (timeLeft -= 1 && !userGuessed) {          // If blurValue > 0, keep going
-        deBlur(timeLeft);       // Call the loop again, and pass it the current value of i
-      } else {
-        picture.style.filter = `blur(${0}px)`
-        console.log('TIMES UP');
-
-      }
-    }, 1000);
-  })(10);
+  
 
 
 
