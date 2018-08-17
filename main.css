@@ -1,14 +1,64 @@
-.wrapper{
-    margin: 0 auto;
-    width: 960px;
+body {
+    background-image: url(pictures/curtains.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    background-position: center;
+    position: relative;
 }
+
+.wrapper {
+    margin: 0 auto;
+    /* width: 960px; */
+    text-align: center;
+}
+
 h1 {
     text-align: center;
+    color: white;
 }
+
 h2 {
     text-align: center;
+    color: white;
 }
-.images {
+.picture-wrapper{
+    width: 50%;
+    margin: 0 auto;
+    
+}
+
+.picture {
+    filter: blur(12px);
+    width: 100%;
+    display: block;
+    /* margin: 0 auto; */
+    
+    
+}
+
+.celeb-names {
     display: flex;
+    justify-content: center;
+    /* align-items: flex-end; */
+    margin: 50px 0 0 0;
+    
+    position: absolute;
+    bottom: 50px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+}
+
+.names {
+    width: 15%;
+    height: 100px;
+    margin: 0 10px;
+    border-radius: 30px;
+    filter: opacity(0.5);
+    font-size: 20px;
+    
+    
+
 
 }
