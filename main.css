@@ -29,12 +29,10 @@ h2 {
 }
 
 .picture {
-    filter: blur(12px);
+    filter: blur(40px);
     width: 100%;
     display: block;
     /* margin: 0 auto; */
-    
-    
 }
 
 .celeb-names {
@@ -61,4 +59,8 @@ h2 {
     
 
 
+}
+#timer_div {
+    color: white;
+    font-size: 50px;
 }
