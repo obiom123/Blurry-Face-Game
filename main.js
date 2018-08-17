@@ -110,8 +110,10 @@ function startRound() {
         // set clock inner html to be '' 
         if (innerText === celebSection.name) {
           theRightButton.style.backgroundColor = 'green'
+          document.getElementById('timer_div').innerHTML = 'Correct!'
         } else if (innerText !== celebSection.name) {
           theRightButton.style.backgroundColor = 'red'
+          document.getElementById('timer_div').innerHTML = 'SMH! WRONG!'
         }
 
       });
@@ -135,6 +137,6 @@ function startRound() {
 }
 
 startRound();
-// startRound()
+startRound()
 
 
