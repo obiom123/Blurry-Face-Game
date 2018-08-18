@@ -1,4 +1,5 @@
 
+ let to;
 
 const gameData = [
   {
@@ -63,10 +64,13 @@ console.log(document.getElementsByClassName('names'))
 
 function startRound() {
   let userGuessed = false;
+  // on page have a clock element 
+  // get that element with javascript
+
+
   picture.setAttribute('src', gameData[picNumber].image)
   let arrayOfGuessNames = gameData[picNumber].guessNames;
   let celebSection = gameData[picNumber]
-  let countClock = document.getElementById('timer_div')
   function buttonText() {
     for (let i = 0; i < buttons.length; i++) {
       buttons[i].innerHTML = `${arrayOfGuessNames[i]}`
@@ -76,35 +80,12 @@ function startRound() {
   buttonText()
 
   function winLose() {
-
-    (function deBlur(timeLeft) {
-      setTimeout(function () {
-        picture.style.filter = `blur(${timeLeft * 4}px)`
-  
-        // var seconds_left = 10;
-        var interval = setInterval(function () {
-          document.getElementById('timer_div').innerHTML = --timeLeft;
-  
-          if (timeLeft <= 0) {
-            document.getElementById('timer_div').innerHTML = 'Times Up!';
-            clearInterval(interval);
-          }
-        }, 1000);
-  
-        if (timeLeft -= 1 && !userGuessed) {          // If blurValue > 0, keep going
-          deBlur(timeLeft);       // Call the loop again, and pass it the current value of i
-        } else {
-          picture.style.filter = `blur(${0}px)`
-          console.log('TIMES UP');
-  
-        }
-      }, 1000);
-    })(10);
     for (let i = 0; i < buttons.length; i++) {
       buttons[i].addEventListener('click', function (e) {
         let innerText = e.target.innerHTML;
         let theRightButton = e.target
         console.log(e.target);
+
         userGuessed = true;
         // set the blur to 0 here
         // set clock inner html to be '' 
@@ -113,22 +94,79 @@ function startRound() {
           document.getElementById('timer_div').innerHTML = 'Correct!'
         } else if (innerText !== celebSection.name) {
           theRightButton.style.backgroundColor = 'red'
-          document.getElementById('timer_div').innerHTML = 'SMH! WRONG!'
+          document.getElementById('timer_div').innerHTML = 'Wrong!'
         }
+        clearTimeout(to);
+        picture.style.filter = `blur(${0}px)`;
 
       });
 
     }
   }
+  
+
+  // function blurPicturetimer(){
+  //     picture.style.filter = 'blur(10px)'
+
+  // }
+  // blurPicturetimer
 
   let pointsValue = 10;
 
-
-  // citation: mike helped me write this with use of a link
+  // citation: mike help me write this with use of a link
   // https://scottiestech.info/2014/07/01/javascript-fun-looping-with-a-delay/
+  (function deBlur(timeLeft) {
+    to = setTimeout(function () {
+      document.getElementById('timer_div').innerHTML = timeLeft-1;
+      picture.style.filter = `blur(${timeLeft * 4.2}px)`
+
+
+      
+      // set the clock element inner html to equal timeleft
+      if (timeLeft -= 1 && !userGuessed) {          // If blurValue > 0, keep going
+        console.log('first');
+        deBlur(timeLeft);       // Call the loop again, and pass it the current value of i
+      } else {
+        console.log('SEcond');
+
+        picture.style.filter = `blur(${0}px)`
+        document.getElementById('timer_div').innerHTML = 'Times Up!';
+          // clearTimeout(to);
+        console.log('TIMES UP');
+        
+      }
+    }, 1000);
+  })(10);
   
+  // var seconds_left = 10;
+  // var interval = setInterval(function() {
+      
+  
+  //     if (seconds_left <= 0)
+  //     {
+  //         document.getElementById('timer_div').innerHTML = 'Times Up!';
+  //         clearInterval(interval);
+  //     }
+  // }, 1000);
+  // var sec = 10;
+  //   function pad ( val ) { return val < 10 ? val : "0" + val; }
+  //   setInterval( function(){
+  //       document.getElementById("seconds").innerHTML=pad(--sec%60);
+  //   }, 1000);
+
+  // let blurValue = 37;
+
+  // while (blurValue > 0) {
+  //  setTimeout
+  // }
 
 
+
+  // function (e) {
+  //     console.log(e.target)
+  //     if (buttons[i] === gameData[picNumber].name) {
+
+  //     }
 
   guessNameNumber++;
   picNumber++;
@@ -137,6 +175,9 @@ function startRound() {
 }
 
 startRound();
-startRound()
+// startRound()
 
 
+// next steps
+// wrap all of the above code in a function startRound that you call when the page loads. 
+// you are also going to want to call . mike is not observant you already did that  
