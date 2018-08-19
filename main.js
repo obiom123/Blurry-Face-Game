@@ -1,6 +1,4 @@
 
- let to;
-
 const gameData = [
   {
     name: 'Justin Beiber',
@@ -57,38 +55,32 @@ const gameData = [
 
 const picture = document.querySelector('.picture');
 const buttons = document.getElementsByClassName('names');
-let picNumber = 0
-let guessNameNumber = 0
-console.log(document.getElementsByClassName('names'))
-// buttons[0].innerHTML = 'cool beans'
+let picNumber = 0;
+let guessNameNumber = 0;
 
 function startRound() {
-  let userGuessed = false;
-  // on page have a clock element 
-  // get that element with javascript
+  
+let userGuessed = false;
+picture.setAttribute('src', gameData[picNumber].image);
+let arrayOfGuessNames = gameData[picNumber].guessNames;
+let celebSection = gameData[picNumber];
+let to;
 
-
-  picture.setAttribute('src', gameData[picNumber].image)
-  let arrayOfGuessNames = gameData[picNumber].guessNames;
-  let celebSection = gameData[picNumber]
   function buttonText() {
     for (let i = 0; i < buttons.length; i++) {
       buttons[i].innerHTML = `${arrayOfGuessNames[i]}`
     }
-
   }
-  buttonText()
+  
+  
 
   function winLose() {
     for (let i = 0; i < buttons.length; i++) {
       buttons[i].addEventListener('click', function (e) {
         let innerText = e.target.innerHTML;
         let theRightButton = e.target
-        console.log(e.target);
-
+        console.log(e.target, picNumber);
         userGuessed = true;
-        // set the blur to 0 here
-        // set clock inner html to be '' 
         if (innerText === celebSection.name) {
           theRightButton.style.backgroundColor = 'green'
           document.getElementById('timer_div').innerHTML = 'Correct!'
@@ -98,86 +90,42 @@ function startRound() {
         }
         clearTimeout(to);
         picture.style.filter = `blur(${0}px)`;
+        setTimeout(function(){theRightButton.style.backgroundColor = '';}, 500)
+        
 
       });
-
     }
   }
-  
 
-  // function blurPicturetimer(){
-  //     picture.style.filter = 'blur(10px)'
-
-  // }
-  // blurPicturetimer
-
-  let pointsValue = 10;
-
-  // citation: mike help me write this with use of a link
+  // citation: mike helped me write this with use of a link
   // https://scottiestech.info/2014/07/01/javascript-fun-looping-with-a-delay/
-  (function deBlur(timeLeft) {
+  function deBlur(timeLeft) {
     to = setTimeout(function () {
-      document.getElementById('timer_div').innerHTML = timeLeft-1;
+      document.getElementById('timer_div').innerHTML = timeLeft - 1;
       picture.style.filter = `blur(${timeLeft * 4.2}px)`
-
-
-      
-      // set the clock element inner html to equal timeleft
-      if (timeLeft -= 1 && !userGuessed) {          // If blurValue > 0, keep going
+      if (timeLeft -= 1 && !userGuessed) {
         console.log('first');
-        deBlur(timeLeft);       // Call the loop again, and pass it the current value of i
+        deBlur(timeLeft);
       } else {
         console.log('SEcond');
-
         picture.style.filter = `blur(${0}px)`
         document.getElementById('timer_div').innerHTML = 'Times Up!';
-          // clearTimeout(to);
+        // clearTimeout(to);
         console.log('TIMES UP');
-        
+
       }
     }, 1000);
-  })(10);
+  };
   
-  // var seconds_left = 10;
-  // var interval = setInterval(function() {
-      
-  
-  //     if (seconds_left <= 0)
-  //     {
-  //         document.getElementById('timer_div').innerHTML = 'Times Up!';
-  //         clearInterval(interval);
-  //     }
-  // }, 1000);
-  // var sec = 10;
-  //   function pad ( val ) { return val < 10 ? val : "0" + val; }
-  //   setInterval( function(){
-  //       document.getElementById("seconds").innerHTML=pad(--sec%60);
-  //   }, 1000);
-
-  // let blurValue = 37;
-
-  // while (blurValue > 0) {
-  //  setTimeout
-  // }
-
-
-
-  // function (e) {
-  //     console.log(e.target)
-  //     if (buttons[i] === gameData[picNumber].name) {
-
-  //     }
-
-  guessNameNumber++;
-  picNumber++;
   winLose()
+  buttonText()
+  deBlur(10)
+
+
+  // guessNameNumber++;
+  picNumber++;
+  
 
 }
 
 startRound();
-// startRound()
-
-
-// next steps
-// wrap all of the above code in a function startRound that you call when the page loads. 
-// you are also going to want to call . mike is not observant you already did that  
