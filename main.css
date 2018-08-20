@@ -37,13 +37,11 @@ h2 {
     filter: blur(40px);
     width: 100%;
     display: block;
-    /* margin: 0 auto; */
 }
 
 .celeb-names {
     display: flex;
     justify-content: center;
-    /* align-items: flex-end; */
     margin: 50px 0 0 0;
     position: absolute;
     bottom: 50px;
@@ -59,6 +57,11 @@ h2 {
     border-radius: 30px;
     filter: opacity(0.5);
     font-size: 20px;
+}
+
+.names:hover {
+    cursor: pointer;
+    background-color: blueviolet;
 }
 
 #timer_div {
