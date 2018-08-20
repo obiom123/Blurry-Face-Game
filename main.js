@@ -2,54 +2,75 @@
 const gameData = [
   {
     name: 'Justin Beiber',
-    guessNames: ['Lindsey Lohan', 'Eleven, from Stanger Things', 'Justin Beiber', 'Aaron Carter'],
-    image: 'pictures/beiber.jpeg'
+    guessNames: ['Lindsey Lohan', 'Eleven, from Stanger Things', 'Justin Beiber', 'Miley Cyrus'],
+    image: 'pictures/beiber.jpg'
   },
   {
     name: 'Britney Spears',
-    guessNames: ['name', 'name', 'Britney Spears', 'name'],
+    guessNames: ['Adele', 'Lady Gaga', 'Britney Spears', 'Ivanka Trump'],
     image: 'pictures/britney.jpeg'
   },
   {
     name: 'Jesica Alba',
-    guessNames: ['name', 'name', 'name', 'Jesica Alba'],
+    guessNames: ['Ariana Grande', 'Selena Gomez', 'Gloria from Modern Family', 'Jesica Alba'],
     image: 'pictures/alba.jpeg'
   },
   {
     name: 'Halle Berry',
-    guessNames: ['name', 'Halle Berry', 'name', 'name'],
+    guessNames: ['Olivia Pope', 'Halle Berry', 'Beyonce', 'Rihanna'],
     image: 'pictures/halle.jpeg'
   },
   {
     name: 'Khaleesi Dragon Queen',
-    guessNames: ['name', 'name', 'name', 'Khaleesi Dragon Queen'],
+    guessNames: ['Rachel McAdams', 'Kim Kardashian', 'name', 'Khaleesi Dragon Queen'],
     image: 'pictures/khaleesi.jpeg'
   },
   {
     name: 'Kobe Bryant',
-    guessNames: ['Kobe Bryant', 'name', 'name', 'name'],
+    guessNames: ['Kobe Bryant', 'Lebron James', 'Michael Jordan', 'Magic Johnson'],
     image: 'pictures/kobe.jpg'
   },
   {
     name: 'President Obama',
-    guessNames: ['name', 'name', 'name', 'President Obama'],
+    guessNames: ['Kid from Kid&Play', 'The Fresh Prince', 'Cuban Gooding Jr.', 'President Obama'],
     image: 'pictures/Obama.jpg'
   },
   {
     name: 'Chef Ramsay',
-    guessNames: ['name', 'Chef Ramsay', 'name', 'name'],
+    guessNames: ['Regis Philbin', 'Chef Ramsay', 'Dr. Phil', 'Alex Trebek'],
     image: 'pictures/ramsay.jpg'
   },
   {
     name: 'Tom Cruise',
-    guessNames: ['Tom Cruise', 'name', 'name', 'name'],
+    guessNames: ['Tom Cruise', 'Tom Hanks', 'Leonardo DiCaprio', 'Bradpit'],
     image: 'pictures/tom.jpeg'
   },
   {
-    name: 'Will Smith',
-    guessNames: ['name', 'name', 'Will Smith', 'name'],
-    image: 'pictures/will.jpg'
+    name: 'Mike, Master Coder/Biker',
+    guessNames: ['Michael Keaton', 'Magic Mike', 'Mike, Master Coder/Biker', 'Michael J. Fox'],
+    image: 'pictures/mike.png'
   },
+  {
+    name: 'Erlich Bachman, Silicon Valley',
+    guessNames: ['Eric Lewis, Master Coder/Youtuber', 'Erlich Bachman, Silicon Valley', 'Chandler, Friends', 'Mark Zuckerberg'],
+    image: 'pictures/Erlich.jpg'
+  },
+  {
+    name: 'Kevin Hart',
+    guessNames: ['Chris Tucker', 'Kanye West', 'Denzel Washington', 'Kevin Hart'],
+    image: 'pictures/Hart.jpg'
+  },
+  {
+    name: 'Trump With A Man-Bun',
+    guessNames: ['Merly Streep', 'Trump With A Man-Bun', 'Mrs. Doubtfire', 'Your GrandMother'],
+    image: 'pictures/trump.jpg'
+  },
+  {
+    name: 'Hermione, From Harry Potter',
+    guessNames: ['Kat, From Class', 'iCarly', 'Hannah Baker, 13 Reasons Why', 'Hermione, From Harry Potter'],
+    image: 'pictures/Hermione.jpg'
+  },
+  
 
 ]
 
@@ -61,6 +82,8 @@ let scorePoints = 0;
 let scoreBoard = document.querySelector('.score');
 scoreBoard.innerHTML = `Score: ${scorePoints}`;
 console.log(scorePoints)
+const wrongsound = document.getElementById('wrongsound');
+const correctsound = document.getElementById('correctsound');
 
 function startRound() {
   let userGuessed = false;
@@ -85,9 +108,11 @@ function startRound() {
       document.getElementById('timer_div').innerHTML = 'Correct!';
       scoreBoard.innerHTML = `Score: ${scorePoints +=10}`
       console.log(scoreBoard);
+      correctsound.play();
     } else if (innerText !== celebSection.name) {
       theRightButton.style.backgroundColor = 'red';
       document.getElementById('timer_div').innerHTML = 'Wrong!';
+      wrongsound.play();
     }
     clearTimeout(to);
     picture.style.filter = `blur(${0}px)`;
