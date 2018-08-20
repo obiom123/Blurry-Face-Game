@@ -6,6 +6,10 @@ body {
     background-position: center;
     position: relative;
 }
+.score {
+    font-size: 60px;
+    color: white;
+}
 
 .wrapper {
     margin: 0 auto;
@@ -23,7 +27,7 @@ h2 {
     color: white;
 }
 .picture-wrapper{
-    width: 50%;
+    width: 30%;
     margin: 0 auto;
     
 }

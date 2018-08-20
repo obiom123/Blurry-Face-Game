@@ -57,75 +57,93 @@ const picture = document.querySelector('.picture');
 const buttons = document.getElementsByClassName('names');
 let picNumber = 0;
 let guessNameNumber = 0;
+let scorePoints = 0;
+let scoreBoard = document.querySelector('.score');
+scoreBoard.innerHTML = `Score: ${scorePoints}`;
+console.log(scorePoints)
 
 function startRound() {
-  
-let userGuessed = false;
-picture.setAttribute('src', gameData[picNumber].image);
-let arrayOfGuessNames = gameData[picNumber].guessNames;
-let celebSection = gameData[picNumber];
-let to;
+  let userGuessed = false;
+  picture.setAttribute('src', gameData[picNumber].image);
+  let arrayOfGuessNames = gameData[picNumber].guessNames;
+  let celebSection = gameData[picNumber];
+  let to;
 
   function buttonText() {
     for (let i = 0; i < buttons.length; i++) {
-      buttons[i].innerHTML = `${arrayOfGuessNames[i]}`
+      buttons[i].innerHTML = `${arrayOfGuessNames[i]}`;
     }
   }
-  
-  
+
+  function handleClick(e) {
+    let innerText = e.target.innerHTML;
+    let theRightButton = e.target;
+    // console.log(e.target, picNumber);
+    userGuessed = true;
+    if (innerText === celebSection.name) {
+      theRightButton.style.backgroundColor = 'green';
+      document.getElementById('timer_div').innerHTML = 'Correct!';
+      scoreBoard.innerHTML = `Score: ${scorePoints +=10}`
+      console.log(scoreBoard);
+    } else if (innerText !== celebSection.name) {
+      theRightButton.style.backgroundColor = 'red';
+      document.getElementById('timer_div').innerHTML = 'Wrong!';
+    }
+    clearTimeout(to);
+    picture.style.filter = `blur(${0}px)`;
+    setTimeout(function() {
+      picture.style.filter = `blur(40px)`;
+      theRightButton.style.backgroundColor = '';
+      document.getElementById('timer_div').innerHTML = 'Who is this?';
+      startRound();
+    }, 2000);
+
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].removeEventListener('click', handleClick);
+    }
+  }
 
   function winLose() {
     for (let i = 0; i < buttons.length; i++) {
-      buttons[i].addEventListener('click', function (e) {
-        let innerText = e.target.innerHTML;
-        let theRightButton = e.target
-        console.log(e.target, picNumber);
-        userGuessed = true;
-        if (innerText === celebSection.name) {
-          theRightButton.style.backgroundColor = 'green'
-          document.getElementById('timer_div').innerHTML = 'Correct!'
-        } else if (innerText !== celebSection.name) {
-          theRightButton.style.backgroundColor = 'red'
-          document.getElementById('timer_div').innerHTML = 'Wrong!'
-        }
-        clearTimeout(to);
-        picture.style.filter = `blur(${0}px)`;
-        setTimeout(function(){theRightButton.style.backgroundColor = '';}, 500)
-        
-
-      });
+      buttons[i].addEventListener('click', handleClick);
     }
   }
 
   // citation: mike helped me write this with use of a link
   // https://scottiestech.info/2014/07/01/javascript-fun-looping-with-a-delay/
   function deBlur(timeLeft) {
-    to = setTimeout(function () {
+    to = setTimeout(function() {
       document.getElementById('timer_div').innerHTML = timeLeft - 1;
-      picture.style.filter = `blur(${timeLeft * 4.2}px)`
-      if (timeLeft -= 1 && !userGuessed) {
-        console.log('first');
+      picture.style.filter = `blur(${timeLeft * 4.2}px)`;
+      if ((timeLeft -= 1 && !userGuessed)) {
+        // console.log('first');
         deBlur(timeLeft);
       } else {
-        console.log('SEcond');
-        picture.style.filter = `blur(${0}px)`
+        // console.log('Second');
+        picture.style.filter = `blur(${0}px)`;
         document.getElementById('timer_div').innerHTML = 'Times Up!';
         // clearTimeout(to);
-        console.log('TIMES UP');
-
+        for (let i = 0; i < buttons.length; i++) {
+          buttons[i].removeEventListener('click', handleClick);
+        }
+        // console.log('TIMES UP');
+        clearTimeout(to);
+    picture.style.filter = `blur(${0}px)`;
+    setTimeout(function() {
+      picture.style.filter = `blur(40px)`;
+      document.getElementById('timer_div').innerHTML = 'Who is this?';
+      startRound();
+    }, 2000);
       }
     }, 1000);
-  };
-  
-  winLose()
-  buttonText()
-  deBlur(10)
+  }
 
+  winLose();
+  buttonText();
+  deBlur(10);
 
   // guessNameNumber++;
   picNumber++;
-  
-
 }
 
 startRound();
