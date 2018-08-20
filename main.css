@@ -6,6 +6,7 @@ body {
     background-position: center;
     position: relative;
 }
+
 .score {
     font-size: 60px;
     color: white;
@@ -26,10 +27,10 @@ h2 {
     text-align: center;
     color: white;
 }
-.picture-wrapper{
+
+.picture-wrapper {
     width: 30%;
     margin: 0 auto;
-    
 }
 
 .picture {
@@ -44,7 +45,6 @@ h2 {
     justify-content: center;
     /* align-items: flex-end; */
     margin: 50px 0 0 0;
-    
     position: absolute;
     bottom: 50px;
     margin: 0 auto;
@@ -59,11 +59,8 @@ h2 {
     border-radius: 30px;
     filter: opacity(0.5);
     font-size: 20px;
-    
-    
-
-
 }
+
 #timer_div {
     color: white;
     font-size: 50px;
