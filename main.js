@@ -136,7 +136,7 @@ function startRound() {
     }
   }
 
-  // citation: mike helped me write this with use of a link
+
   // https://scottiestech.info/2014/07/01/javascript-fun-looping-with-a-delay/
   function deBlur(timeLeft) {
     to = setTimeout(function () {
